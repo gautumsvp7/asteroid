@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asteroid Risk Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Asteroid Risk Predictor</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="diameter">Asteroid Mean Diameter (km):</label>
+                <input type="text" id="diameter" name="diameter" value="{{ diameter if diameter is not none else '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="velocity">Velocity Relative to Earth (km/h):</label>
+                <input type="text" id="velocity" name="velocity" value="{{ velocity if velocity is not none else '' }}" required>
+            </div>
+            <div class="form-group">
+                <label for="distance">Minimum Approach Distance to Earth (km):</label>
+                <input type="text" id="distance" name="distance" value="{{ distance if distance is not none else '' }}" required>
+            </div>
+            <button type="submit">Predict Risk</button>
+        </form>
+
+        {% if error_text %}
+            <div class="result error">
+                <p>{{ error_text }}</p>
+            </div>
+        {% endif %}
+
+        {% if prediction_text %}
+            <div class="result">
+                <h2>Prediction Result:</h2>
+                <p>The estimated risk is: <strong>{{ prediction_text }}</strong></p>
+            </div>
+        {% endif %}
+    </div>
+    <footer>
+        <p>Note: This predictor uses a simplified model for demonstration purposes.</p>
+    </footer>
+</body>
+</html>
