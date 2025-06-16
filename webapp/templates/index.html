@@ -1,45 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Asteroid Risk Predictor</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <div class="container">
-        <h1>Asteroid Risk Predictor</h1>
-        <form method="POST">
-            <div class="form-group">
-                <label for="diameter">Asteroid Mean Diameter (km):</label>
-                <input type="text" id="diameter" name="diameter" value="{{ diameter if diameter is not none else '' }}" required>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex min-h-screen flex-col bg-[#111a22] font-sans overflow-x-hidden" style='font-family: "Space Grotesk", "Noto Sans", sans-serif;'>
+      <div class="flex h-full grow flex-col">
+        <header class="flex items-center justify-between border-b border-[#243647] px-10 py-3">
+          <div class="flex items-center gap-4 text-white">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M24 4H6V17.3333V30.6667H24V44H42V30.6667V17.3333H24V4Z" fill="currentColor"></path>
+              </svg>
             </div>
-            <div class="form-group">
-                <label for="velocity">Velocity Relative to Earth (km/h):</label>
-                <input type="text" id="velocity" name="velocity" value="{{ velocity if velocity is not none else '' }}" required>
+            <h2 class="text-white text-lg font-bold">Cosmic Shield</h2>
+          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <div class="flex items-center gap-9">
+              <a class="text-white text-sm font-medium" href="#">Home</a>
+              <a class="text-white text-sm font-medium" href="#">About</a>
+              <a class="text-white text-sm font-medium" href="#">Contact</a>
             </div>
-            <div class="form-group">
-                <label for="distance">Minimum Approach Distance to Earth (km):</label>
-                <input type="text" id="distance" name="distance" value="{{ distance if distance is not none else '' }}" required>
-            </div>
-            <button type="submit">Predict Risk</button>
-        </form>
+          </div>
+        </header>
 
-        {% if error_text %}
-            <div class="result error">
-                <p>{{ error_text }}</p>
-            </div>
-        {% endif %}
+        <div class="px-4 md:px-40 flex flex-1 justify-center py-5">
+          <div class="flex flex-col max-w-[960px] w-full">
+            <div class="w-full bg-[#111a22] rounded-lg min-h-80 bg-center bg-cover bg-no-repeat overflow-hidden" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBwfWvX2nzOdnJFrx2_d8JdCbAo6lWUXQvLWCvoch6wsu44PBYNUXz7Vv1q81Z0lUjlzwkNWsQ2vu92FHDATseEOgUOS0XDJ3bNMyLQDDHIya11I1YLfxbCM7bVIwE5KdR3k92MrTs_5VIlH4Fcf1qUjEQdKcgJm3Nym4fd099IBLvScjx2l6U3C6XNYri7XDya2mixlRgGm7amnU07SkGpAKgJki-6u_OQz2JL4fuN20qHoPjH6zSMvkxQRf2SBCaBgpkYf9qgw2o");'></div>
 
-        {% if prediction_text %}
-            <div class="result">
-                <h2>Prediction Result:</h2>
-                <p>The estimated risk is: <strong>{{ prediction_text }}</strong></p>
+            <h2 class="text-white text-[28px] font-bold text-center py-6">Predict Asteroid Impact Risk</h2>
+
+            <form method="POST" class="flex flex-col items-center w-full">
+              <div class="w-full max-w-[480px] px-4 py-3">
+                <label class="flex flex-col text-white text-base font-medium pb-2">
+                  Diameter (km)
+                  <input
+                    type="text"
+                    name="diameter"
+                    placeholder="Enter diameter"
+                    value="{{ diameter if diameter is not none else '' }}"
+                    required
+                    class="form-input mt-2 rounded-lg text-white border border-[#344d65] bg-[#1a2632] h-14 px-4 placeholder:text-[#93adc8]"
+                  />
+                </label>
+              </div>
+
+              <div class="w-full max-w-[480px] px-4 py-3">
+                <label class="flex flex-col text-white text-base font-medium pb-2">
+                  Velocity (km/h)
+                  <input
+                    type="text"
+                    name="velocity"
+                    placeholder="Enter velocity"
+                    value="{{ velocity if velocity is not none else '' }}"
+                    required
+                    class="form-input mt-2 rounded-lg text-white border border-[#344d65] bg-[#1a2632] h-14 px-4 placeholder:text-[#93adc8]"
+                  />
+                </label>
+              </div>
+
+              <div class="w-full max-w-[480px] px-4 py-3">
+                <label class="flex flex-col text-white text-base font-medium pb-2">
+                  Distance (km)
+                  <input
+                    type="text"
+                    name="distance"
+                    placeholder="Enter distance"
+                    value="{{ distance if distance is not none else '' }}"
+                    required
+                    class="form-input mt-2 rounded-lg text-white border border-[#344d65] bg-[#1a2632] h-14 px-4 placeholder:text-[#93adc8]"
+                  />
+                </label>
+              </div>
+
+              <div class="px-4 py-3">
+                <button
+                  type="submit"
+                  class="rounded-lg bg-[#1465b7] text-white text-sm font-bold px-6 h-10 tracking-wide"
+                >
+                  Predict
+                </button>
+              </div>
+            </form>
+
+            {% if error_text %}
+            <div class="text-red-400 bg-red-950 border border-red-700 rounded-lg max-w-[480px] mx-auto px-4 py-3 mt-4">
+              <p>{{ error_text }}</p>
             </div>
-        {% endif %}
+            {% endif %}
+
+            {% if prediction_text %}
+            <div class="text-green-300 bg-green-950 border border-green-700 rounded-lg max-w-[480px] mx-auto px-4 py-3 mt-4">
+              <h3 class="font-semibold">Prediction Result:</h3>
+              <p>The estimated risk is: <strong>{{ prediction_text }}</strong></p>
+            </div>
+            {% endif %}
+
+            <footer class="text-center text-sm text-gray-400 mt-8 pb-6">
+              <p>Note: This predictor uses a simplified model for demonstration purposes.</p>
+            </footer>
+          </div>
+        </div>
+      </div>
     </div>
-    <footer>
-        <p>Note: This predictor uses a simplified model for demonstration purposes.</p>
-    </footer>
-</body>
+  </body>
 </html>
