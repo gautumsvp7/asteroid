@@ -4,10 +4,6 @@
 This project aims to predict whether a near-Earth object (NEO) is potentially hazardous based on its physical and orbital parameters. 
 The focus was to build a deployable machine learning model that handles severe class imbalance and achieves high recall for hazardous predictions.
 
----
-
-## 🔎 Problem Statement
-**Objective:** Classify asteroids as `hazardous (1)` or `non-hazardous (0)`.
 
 **Features Used:**
 - Estimated Diameter (km)
@@ -17,24 +13,20 @@ The focus was to build a deployable machine learning model that handles severe c
 **Target Variable:**
 - `is_hazardous` (binary classification)
 
-**Challenge:**
-- Highly imbalanced dataset (this is because hazardous objects are rare but crucial to detect)
 
----
-
-## 🚀 Key Features
+##  Key Features
 
 ### ⚖️ Feature Engineering
 - Derived a new metric called `risk_score`:  
   \[(diameter \u00d7 velocity\u00b2) / distance\]
 - Normalized using `MinMaxScaler` for consistent input distribution.
 
-### ⚖️ Handling Imbalanced Data
+### Handling Imbalanced Data
 - Used **SMOTE (Synthetic Minority Oversampling Technique)** to balance classes in training data.
 - Test data remains untouched to simulate real-world distributions.
 
-### 📈 Model Building
-- Used **Pipeline** with the following steps:
+### Model Building
+- Used Pipeline with the following steps:
   - MinMaxScaler
   - SMOTE
   - Logistic Regression (`class_weight='balanced'`)
@@ -44,20 +36,14 @@ The focus was to build a deployable machine learning model that handles severe c
   - ROC-AUC
   - Precision-Recall Curves
 
-### ⚖️ Threshold Tuning
-- Analyzed precision-recall vs. threshold to optimize decision boundary.
-- Applied a custom threshold to minimize false negatives.
 
----
-
-## 🚀 Model Performance
+## Model Performance
 - **ROC-AUC:** `0.96`
 - **Accuracy:** `94.4%` (after threshold tuning)
 - Strong recall for the hazardous class with low false negatives
 
----
 
-## 🔧 Tools & Libraries
+## Tools & Libraries
 - Python 
 - scikit-learn
 - imbalanced-learn
@@ -67,7 +53,7 @@ The focus was to build a deployable machine learning model that handles severe c
 
 ---
 
-## 📁 Main files: 
+## Main files: 
 ```bash
 .
 ├── asteroid_model.ipynb        # Main training & evaluation notebook
@@ -79,7 +65,7 @@ The focus was to build a deployable machine learning model that handles severe c
 
 ---
 
-## 🚀 Usage (Deployment Script)
+## Usage 
 
 ```python
 cd into web app:
@@ -88,30 +74,25 @@ then python app.py
 
 ---
 
-## 🎓 What I Learned
+## Takeaways 
 - End-to-end machine learning pipeline creation
 - Handling real-world challenges like class imbalance
 - Threshold tuning for maximizing model effectiveness
 - Preparing ML models for deployment (joblib, clean API, feature handling)
 
----
-
-## 🙌 Future Work
+## Future Work
 - Experiment with ensemble models (Random Forest, XGBoost)
 - Connect to NASA API for real-time NEO prediction
 
----
 
-## 📢 Contact
+## Contact
 **Author:** Gautum Vaisiam Parambil  
 **Email:** gautumsvp@gmail.com
 
 
----
 
-## 💊 Acknowledgements
+## Acknowledgements
 - Dataset sourced from Nasa (https://data.nasa.gov/dataset/asteroids-neows-api)
 - Thanks to open-source libraries that made this project possible
 
----
 
