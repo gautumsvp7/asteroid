@@ -1,6 +1,6 @@
-# 🚀 Asteroid Hazard Prediction Using Machine Learning
+# Asteroid Hazard Prediction Using Machine Learning
 
-## 📅 Project Overview
+##  Project Overview
 This project aims to predict whether a near-Earth object (NEO) is potentially hazardous based on its physical and orbital parameters. 
 The focus was to build a deployable machine learning model that handles severe class imbalance and achieves high recall for hazardous predictions.
 
@@ -16,7 +16,7 @@ The focus was to build a deployable machine learning model that handles severe c
 
 ##  Key Features
 
-### ⚖️ Feature Engineering
+###  Feature Engineering
 - Derived a new metric called `risk_score`:  
   \[(diameter \u00d7 velocity\u00b2) / distance\]
 - Normalized using `MinMaxScaler` for consistent input distribution.
